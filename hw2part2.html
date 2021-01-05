@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework2 Part2</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 2 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                </li>
+            </ul>
+        </nav>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+
+                $('#submit').click(function(){
+                    if($('#homework').val()&&$('#midterm').val()&&$('#final').val()&&$('#participation').val()){
+                       var hw = parseInt($('#homework').val());
+                    var midterm = parseInt($('#midterm').val());
+                    var final = parseInt($('#final').val());
+                    var part = parseInt($('#participation').val());
+                    
+                    if (((hw > 100) || (midterm > 100) || (final > 100) || (part >100))||
+                        ((hw < 0) || (midterm < 0) || (final < 0) || (part < 0))){
+                        $('#warning').html("You must enter only numbers between 0 and 100");
+                        return;
+                    }
+                    $('#warning').html("");
+                    var finalAvg =  (.5 * hw) + (.2 * midterm) + (.2 * final) + (.1 * part);
+                    finalAvg = Math.round(finalAvg);
+                    $('#finalAvg').val(finalAvg);
+                    var letterGrade;
+                    if(finalAvg>=90) letterGrade = "A";
+                    else if (finalAvg >= 80) letterGrade = "B";
+                    else if (finalAvg >= 70) letterGrade = "C";
+                    else if (finalAvg >= 60) {
+                        letterGrade = "D";
+                        $('#warning').html("Student must retake the course.");
+                    }
+                    else {
+                        letterGrade = "F";
+                        $('#warning').html("Student must retake the course.");
+                    }
+                    $('#letterGrade').val(letterGrade);
+                       
+                       }
+                })
+                
+                $('#clearForm').click(function(){
+                    $('#homework').val(null);
+                    $('#midterm').val(null);
+                    $('#final').val(null);
+                    $('#participation').val(null);
+                    $('#warning').html("");
+                    $('#finalAvg').val(null);
+                    $('#letterGrade').val(null);  
+                })
+            })
+        </script>
+        <header>
+            <h1>Homework 2 Part 2</h1>
+            <h2>Student Grades</h2>
+        </header>
+        <main>
+            <p>Enter your grades to determine your final average. Only numbers between 0 and 100 will be accepted.</p>
+            <form>
+                <label for="homework">Average Homework Score:</label>
+                <input type="number" id="homework" name="homework" max="100" min="0" required><br>
+                <label for="midterm">Midterm Exam Score:</label>
+                <input type="number" id="midterm" name="midterm" max="100" min="0" required><br>
+                <label for="final">Final Exam Score:</label>
+                <input type="number" id="final" name="final" max="100" min="0" required><br>
+                <label for="participation">Participation Score:</label>
+                <input type="number" id="participation" name="participation" max="100" min="0" required><br><br>
+                <input type="button" value="Find Out Grade" id="submit">
+                <input type="button" value="Clear Form" id="clearForm"><br><br>
+                <label for="finalAvg">Final Average: </label>
+                <input type="text" id="finalAvg" name ="finalAvg" readonly><br>
+                <label for="letterGrade">Letter Grade: </label>
+                <input type="text" id="letterGrade" name ="letterGrade" readonly>
+            </form>
+            <p id="warning"></p>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework2 Part1</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 2 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Homework 2 Part 1</h1>
+        </header>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+                $('#submit').click(function(){
+                    if($('#num1').val()&& $('#num2').val() && $('#num3').val()&& $('#num4').val()&& $('#num5').val()){
+                       var numArray = [$('#num1').val(), $('#num2').val(), $('#num3').val(), $('#num4').val(), $('#num5').val()];
+                        var negNums = 0;
+                        var posNums = 0;
+                        var zeroes = 0;
+                        numArray.forEach((num)=>{
+                            var testNum = parseInt(num);
+                            if (testNum < 0) negNums++;
+                            else if (testNum > 0) posNums++;
+                            else zeroes++;
+                        })
+                        $('#resultNeg').val(negNums);
+                        $('#resultPos').val(posNums);
+                        $('#resultZero').val(zeroes);
+                       }
+                })
+                $('#restart').click(function(){
+                    $('#num1').val(null);
+                    $('#num2').val(null);
+                    $('#num3').val(null);
+                    $('#num4').val(null);
+                    $('#num5').val(null);
+                    $('#resultNeg').val(null);
+                    $('#resultPos').val(null);
+                    $('#resultZero').val(null);
+                })
+            })
+        </script>
+        <main>
+            <p>Please input 5 numbers. I'll tell you how many are negative, how many are positive, and how many are zeros!</p>
+            <form>
+                <label for="num1">Number 1:</label>
+                <input type="number" id="num1" name="num1" required><br>
+                <label for="num1">Number 2:</label>
+                <input type="number" id="num2" name="num2" required><br>
+                <label for="num1">Number 3:</label>
+                <input type="number" id="num3" name="num3" required><br>
+                <label for="num1">Number 4:</label>
+                <input type="number" id="num4" name="num4" required><br>
+                <label for="num1">Number 5:</label>
+                <input type="number" id="num5" name="num5" required><br>
+                <input type="button" value="Submit Numbers" id="submit">
+                <input type="button" value="Clear Form" id="restart"><br><br>
+                <h3>Results:</h3>
+                <label for="resultNeg">Negative Numbers: </label>
+                <output id="resultNeg" name="resultNeg"></output><br>
+                <label for="resultPos">Posative Numbers: </label>
+                <output id="resultPos" name="resultPos"></output><br>
+                <label for="resultZero">Zeroes: </label>
+                <output id="resultZero" name="resultZero"></output>
+            </form>
+        </main>
+    </body>
+</html>

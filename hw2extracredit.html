@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework2 Extra Credit</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 2 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+
+                var usVal;
+                var euro = {exchange: 0.89, value: null, id: '#euroVal'};
+                var canada = {exchange: 1.31, value: null, id: '#canadaVal'};
+                var hongKong = {exchange: 7.80, value: null, id: '#hongKongVal'};
+                var yen = {exchange: 108.38, value: null, id: '#yenVal'};
+                var peso = {exchange: 19.11, value: null, id: '#pesoVal'};
+                var currencies = [euro, canada, hongKong, yen, peso];
+                function calculateValue(currency){
+                    currency.value = currency.exchange * usVal;
+                }
+                var clickedOnce = false;
+                function display(){
+                    if($('#usDollars').val()){
+                        usVal = parseFloat($('#usDollars').val());
+                        console.log(usVal);
+                        currencies.forEach((currency)=>{
+                        calculateValue(currency);
+                        $(currency.id).val(currency.value.toFixed(2));
+                        })
+                        if (clickedOnce == false){
+                            $('#hiddenTable').slideToggle('slow');
+                            $('#message').html('Enter a new value in US dollars and click to convert again.');
+                            clickedOnce = true;
+                        }
+                       }
+                }
+                $('#usDollars').focus(function(){
+                    $(this).css('background-color','yellow');
+                })
+                $('#clickToDisplay').click(function(){
+                    display();
+                })            
+            })
+        </script>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Homework 2 Extra Credit</h1>
+        </header>
+        <main>
+            <p>Input amount in US dollars to display the equivalents based on July 2019 exchange rates:</p>
+        <form>
+            <label for="usDollars">Amount in US dollars: </label><input type="number" step=".01" id="usDollars" name="usDollars" required>
+            <input type="button" id="clickToDisplay" name="clickToDisplay" value="Click to display!">
+        </form>
+        <br>
+        <table class="exchangeRateTable" id="hiddenTable">
+            <tr class="exchangeRateTable">
+                <th colspan="3">Monetary Exchange Rates</th>
+            </tr>
+            <tr class="exchangeRateTable">
+                <th class="exchangeRateTable">Currency</th>
+                <th class="exchangeRateTable">Rate</th>
+                <th class="exchangeRateTable">Value</th>
+            </tr>
+            <tr class="exchangeRateTable">
+                <td class="exchangeRateTable">Euro</td>
+                <td class="exchangeRateTable">0.89</td>
+                <td class="exchangeRateTable"><input id="euroVal" name="euroVal" readonly></td>
+            </tr>
+            <tr class="exchangeRateTable">
+                <td class="exchangeRateTable">Canadian Dollar</td>
+                <td class="exchangeRateTable">1.31</td>
+                <td class="exchangeRateTable"><input id="canadaVal" name="canadaVal" readonly></td>
+            </tr>
+            <tr class="exchangeRateTable">
+                <td class="exchangeRateTable">Hong Kong Dollar</td>
+                <td class="exchangeRateTable">7.80</td>
+                <td class="exchangeRateTable"><input id="hongKongVal" name="hongKongVal" readonly></td>
+            </tr>
+            <tr class="exchangeRateTable">
+                <td class="exchangeRateTable">Japanese Yen</td>
+                <td class="exchangeRateTable">108.38</td>
+                <td class="exchangeRateTable"><input id="yenVal" name="yenVal" readonly></td>
+            </tr>
+            <tr class="exchangeRateTable">
+                <td class="exchangeRateTable">Mexican Peso</td>
+                <td class="exchangeRateTable">19.11</td>
+                <td class="exchangeRateTable"><input id="pesoVal" name="pesoVal" readonly></td>
+            </tr>
+        </table>
+        <p id="message"></p>
+        </main>
+    </body>
+</html>

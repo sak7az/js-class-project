@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework2 Part3</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 2 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        
+    </head>
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( document ).tooltip();
+            } );
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+                
+                var item1 = {
+                    number: 0,
+                    value: 239.99,
+                    outputNumId: '#outputItem1num',
+                    outputTotalId: '#item1Total',
+                    total: 0
+                }
+                var item2 = {
+                    number: 0,
+                    value: 129.75,
+                    outputNumId: '#outputItem2num',
+                    outputTotalId: '#item2Total',
+                    total: 0
+
+                }
+                var item3 = {
+                    number: 0,
+                    value: 99.95,
+                    outputNumId: '#outputItem3num',
+                    outputTotalId: '#item3Total',
+                    total: 0
+                }
+                var item4 = {
+                    number: 0,
+                    value: 350.89,
+                    outputNumId: '#outputItem4num',
+                    outputTotalId: '#item4Total',
+                    total: 0
+                }
+
+                function totalItems(item, num){
+                    item.number = num;
+                    $(item.outputNumId).val(item.number);
+                    item.total = (item.number * item.value);
+                    $(item.outputTotalId).val(item.total.toFixed(2));
+                }
+                
+                function sum(a, b, c, d){
+                    return a+b+c+d;
+                }
+                
+                $('#submit').click(function(){
+                    if (($('#numItem1').val().includes('-'))||
+                       ($('#numItem2').val().includes('-'))||
+                       ($('#numItem3').val().includes('-'))||
+                       ($('#numItem4').val().includes('-'))||
+                       ($('#numItem1').val().includes('.'))||
+                       ($('#numItem2').val().includes('.'))||
+                       ($('#numItem3').val().includes('.'))||
+                       ($('#numItem4').val().includes('.'))){
+                        $('#outputText').html("Items can only be sold in positive whole numbers. Please try again.");
+                        return;
+                    }
+                    if($('#numItem1').val()&&
+                       $('#numItem2').val()&&
+                       $('#numItem3').val()&&
+                       $('#numItem4').val()){
+                        totalItems(item1, parseInt($('#numItem1').val()));
+                        totalItems(item2, parseInt($('#numItem2').val()));
+                        totalItems(item3, parseInt($('#numItem3').val()));
+                        totalItems(item4, parseInt($('#numItem4').val()));
+                        $('#totalNumItems').val(sum(item1.number, item2.number, item3.number, item4.number));
+                        var weeklyEarnings=sum(item1.total, item2.total, item3.total, item4.total).toFixed(2);
+                        $('#weeklyEarnings').val(weeklyEarnings);
+                    }
+                })
+            });
+        </script>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Homework 2 Part 3</h1>
+        </header>
+        <main>
+            <form>
+                <label for="salesperson">Salesperson</label>
+                <input type="text" name="salesperson" id="salesperson" title="Please make sure that the salesperson's name is spelled correctly" required><br><br>
+                <h3>Input the number of items sold for each number:</h3>
+                <label for="numItem1">Item 1:</label>
+                <input type="number" name="numItem1" id="numItem1" required><br>
+                <label for="numItem2">Item 2:</label>
+                <input type="number" name="numItem2" id="numItem2" required><br>
+                <label for="numItem3">Item 3:</label>
+                <input type="number" name="numItem3" id="numItem3" required><br>
+                <label for="numItem2">Item 4:</label>
+                <input type="number" name="numItem4" id="numItem4" required><br>
+                <input type="button" id="submit" name="submit" value="Submit">
+                <input type="reset"><br>
+                <table>
+                    <tr>
+                        <th>Item #</th>
+                        <th>Price</th>
+                        <th>Number Sold</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>$239.99</td>
+                        <td><input type="text" id="outputItem1num" name="outputItem1num" readonly></td>
+                        <td><input type="text" id="item1Total" name="item1Total" readonly> </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>$129.75</td>
+                        <td><input type="text" id="outputItem2num" name="outputItem2num" readonly></td>
+                        <td><input type="text" id="item2Total" name="item2Total" readonly> </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>$99.95</td>
+                        <td><input type="text" id="outputItem3num" name="outputItem3num" readonly></td>
+                        <td><input type="text" id="item3Total" name="item3Total" readonly> </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>$239.99</td>
+                        <td><input type="text" id="outputItem4num" name="outputItem4num" readonly></td>
+                        <td><input type="text" id="item4Total" name="item4Total" readonly> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><label for="totalNumItems">Total Amount Sold:</label></td>
+                        <td><input type="text" id="totalNumItems" name="totalNumItems" readonly> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><label for="weeklyEarnings">Total Weekly Earnings:</label></td>
+                        <td><input type="text" id="weeklyEarnings" name="weeklyEarnings" readonly> </td>
+                    </tr>
+                </table>
+            </form>
+            <p id="outputText"></p>
+        </main>
+    </body>
+</html>

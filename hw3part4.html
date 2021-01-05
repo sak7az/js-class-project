@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework3 Part4</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 3 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Homework 3 Part 4</h1>
+        </header>
+        <main>
+            <form onsubmit="return false">
+                <p>Enter a state name, and I'll retrieve some basic information about it for you.</p>
+                <label for="selectState">Please enter the state:</label>
+                <input type="text" name="selectState" id="selectState">
+                <button type="submit" id="submit">State Info</button>
+                <br><br>
+                <div id="stateFoundResponse" style="display: none;">
+                    <p>Thanks for your inquiry, here is the information you requested:</p>
+                    <label for="stateAbbr">State abbr: </label><input type="text" readonly name="stateAbbr" id="stateAbbr"><br>
+                    <label for="stateName">State Name: </label><input type="text" readonly name="stateName" id="stateName"><br>
+                    <label for="capital">Capital: </label><input type="text" readonly name="capital" id="capital"><br>
+                    <label for="population">Population: </label><input type="text" readonly name="population" id="population"><br>
+                    <p>Submit a new state name or abbreviation to update information.</p>
+                </div>
+                <div id="stateNotFoundResponse" style="display: none;">
+                    <p>We don't have that state's information. Please enter a new state name and try again.</p>
+                </div>
+            </form>
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+
+                var states = [
+                    ['AL', 'Alabama', 'Montgomery', 4887871],
+                    ['AK','Alaska', 'Juneau', 737438],
+                    ['AZ', 'Arizona', 'Phoenix', 7171646],
+                    ['AR', 'Arkansas', 'Little Rock', 3010825],
+                    ['CA', 'California', 'Sacramento', 39557045],
+                    ['CO', 'Colorado', 'Denver', 5694564]
+                ];
+
+                $("#submit").click(function(){
+                    var selectState = $('#selectState').val().toUpperCase();
+                    var stateIdx = -1;
+                    for (var i = 0; i < states.length; i++){
+                        var state = states[i];
+                        if ((selectState == state[0].toUpperCase()) || (selectState == state[1].toUpperCase())){
+                            stateIdx = i;
+                            break;
+                        }
+                    }
+                    if (stateIdx<0){
+                        $('#stateFoundResponse').hide();
+                        $('#stateNotFoundResponse').show();
+                    } else {
+                        $('#stateAbbr').val(states[stateIdx][0]);
+                        $('#stateName').val(states[stateIdx][1]);
+                        $('#capital').val(states[stateIdx][2]);
+                        $('#population').val(states[stateIdx][3]);
+                        $('#stateNotFoundResponse').hide();
+                        $('#stateFoundResponse').show();
+                    }
+                }) 
+            })
+        </script>
+    </body>
+</html>

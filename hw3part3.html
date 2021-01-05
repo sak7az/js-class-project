@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Homework3 Part3</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Homework 3 for CNIT133">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li class="menuLink">
+                    <a  href="index.html">Homework 1</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw2.html">Homework 2</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw2part1.html">Part 1</a></li>
+                        <li><a href="hw2part2.html">Part 2</a></li>
+                        <li><a href="hw2part3.html">Part 3</a></li>
+                        <li><a href="hw2part4.html">Part 4</a></li>
+                        <li><a href="hw2extracredit.html">Extra Credit</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw3.html">Homework 3</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw3part1.html">Part 1</a></li>
+                        <li><a href="hw3part2.html">Part 2</a></li>
+                        <li><a href="hw3part3.html">Part 3</a></li>
+                        <li><a href="hw3part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw4.html">Homework 4</a>
+                    <ul class="submenu" style="visibility: hidden;">
+                        <li><a href="hw4part1.html">Part 1</a></li>
+                        <li><a href="hw4part2.html">Part 2</a></li>
+                        <li><a href="hw4part3.html">Part 3</a></li>
+                        <li><a href="hw4part4.html">Part 4</a></li>
+                    </ul>
+                </li>
+                <li class="menuLink">
+                    <a href="hw5.html">Homework 5</a>
+                </li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Homework 3 Part 3</h1>
+        </header>
+        <main>
+            <form>
+                <select id="onchangePullDown">
+                    <option>Make your selection...</option>
+                    <option value="https://www.google.com/">Google</option>
+                    <option value="https://codecademy.com/">Codecademy</option>
+                    <option value="https://w3schools.com/">W3 Schools</option>
+                </select><label for="onchangePullDown">  Select to Go!</label>
+                <br><br>
+                <select id="buttonPullDown">
+                    <option>Make your selection...</option>
+                    <option value="https://www.google.com/">Google</option>
+                    <option value="https://codecademy.com/">Codecademy</option>
+                    <option value="https://w3schools.com/">W3 Schools</option>
+                </select>
+                <input type="button" id="button" value="Click to Go!">
+            </form>
+        </main>
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+
+            $(document).ready(function(){
+
+                $('.menuLink').hover(
+                    function(){
+                        $(this).css("background-color", "#ffbb93");
+                        $(this).children(".submenu").css("visibility", "visible");
+                    },
+                    function(){
+                        $(this).css("background-color", "transparent");
+                        $(this).children(".submenu").css("visibility", "hidden");
+                });
+                
+                $('#onchangePullDown').change(function(){
+                    var selection = this.options[this.selectedIndex];
+                    if(selection.value != "Make your selection..."){
+                        window.location = selection.value;
+                    }
+                })
+                $('#button').click(function(){
+                    var newPage = $('#buttonPullDown').children("option:selected").val()
+                    if(newPage != "Make your selection..."){
+                        window.location = newPage;
+                    }
+                });
+            })
+        </script>
+
+    </body>
+    </html>
