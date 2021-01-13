@@ -15,8 +15,10 @@ and jQuery. The project includes the use of:
 *Regex
 
 
-![screenshot of home page](/screencaps/screencap1.png)
 
-![screenshot showing onhover dropdown from toolbar](/screencaps/screencap2.png)
 
-![screenshot showing form parsing phone number](/screencaps/screencap3.png)
+![screenshot of home page](screencaps/screencap1.png)
+
+![screenshot showing onhover dropdown from toolbar](screencaps/screencap2.png)
+
+![screenshot showing form parsing phone number](screencaps/screencap3.png)
